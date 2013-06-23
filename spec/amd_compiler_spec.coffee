@@ -1,7 +1,7 @@
 { shouldCompileAMD, shouldRaise, shouldRunCLI } = require './spec_helper'
 
 describe 'Compiler (toAMD)', ->
-  it 'generates a single export if `export default ` is used', ->
+  it 'generates a single export if `export default` is used', ->
     shouldCompileAMD """
       var jQuery = function() { };
 
@@ -124,11 +124,11 @@ describe 'Compiler (toAMD)', ->
         contents: ['bar.js', 'baz.js']
       'lib/foo.js':
         read: """
-          import "./foo/bar" as bar;
+          import bar from "./foo/bar";
         """
       'lib/foo/bar.js':
         read: """
-          import "./baz" as baz;
+          import baz from "./baz";
         """
       'lib/foo/baz.js':
         read: ""

@@ -26,8 +26,8 @@ class GlobalsCompiler extends AbstractCompiler
         globalImport = @options.imports[name]
         passedArgs.push "#{s.global}.#{globalImport}"
 
-        if name of @importAs
-          receivedArgs.push @importAs[name]
+        if name of @importDefault
+          receivedArgs.push @importDefault[name]
         else
           receivedArgs.push globalImport
 

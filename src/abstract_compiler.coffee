@@ -10,7 +10,7 @@ class AbstractCompiler
     @exports = compiler.exports
     @exportDefault = compiler.exportDefault
     @imports = compiler.imports
-    @importAs = compiler.importAs
+    @importDefault = compiler.importDefault
 
     @moduleName = compiler.moduleName
     @lines = compiler.lines
@@ -19,7 +19,7 @@ class AbstractCompiler
 
     @dependencyNames = []
     @dependencyNames.push name for own name of @imports when name not in @dependencyNames
-    @dependencyNames.push name for own name of @importAs when name not in @dependencyNames
+    @dependencyNames.push name for own name of @importDefault when name not in @dependencyNames
 
     @assertValid()
 
@@ -35,8 +35,8 @@ class AbstractCompiler
       deps = s.unique('dependency')
 
       for name in names
-        if name of @importAs
-          args.push @importAs[name]
+        if name of @importDefault
+          args.push @importDefault[name]
         else
           dependency = deps.next()
           args.push dependency

@@ -11,7 +11,7 @@ class CJSCompiler extends AbstractCompiler
       s.useStrict()
       deps = s.unique('dependency')
 
-      for own import_, name of @importAs
+      for own import_, name of @importDefault
         doImport name, import_
 
       for own import_, variables of @imports

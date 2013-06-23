@@ -103,9 +103,9 @@ describe 'Compiler (toGlobals with CoffeeScript)', ->
       export default Ember
     """, "You cannot use both `export default` and `export` in the same module", coffee: yes
 
-  it 'converts `import foo from "bar"` using a map to globals', ->
+  it 'converts `import { foo } from "bar"` using a map to globals', ->
     shouldCompileGlobals """
-      import View from "ember"
+      import { View } from "ember"
     """, """
       ((Ember) ->
         "use strict"
@@ -151,29 +151,20 @@ describe 'Compiler (toGlobals with CoffeeScript)', ->
       )(window.DS = {}, window.Ember)
     """, imports: { ember: 'Ember' }, into: 'DS', coffee: yes
 
-  it 'converts `import "bar" as foo`', ->
+  it 'converts `import foo from "bar"`', ->
     shouldCompileGlobals """
-      import "underscore" as _
+    import _ from "underscore"
     """, """
       ((_) ->
         "use strict"
       )(window._)
     """, imports: { underscore: '_' }, coffee: yes
 
-  it "supports single quotes in import as", ->
+  it 'supports single quotes in import x from y', ->
     shouldCompileGlobals """
-      import 'underscore' as undy
+      import undy from 'underscore';
     """, """
       ((undy) ->
         "use strict"
       )(window._)
     """, imports: { underscore: '_' }, coffee: yes
-
-  it "supports anonymous modules", ->
-    shouldCompileGlobals """
-      import "underscore" as undy
-    """, """
-      ((undy) ->
-        "use strict"
-      )(window._)
-    """, anonymous: true, imports: { underscore: '_' }, coffee: yes

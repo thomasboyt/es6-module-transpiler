@@ -64,15 +64,7 @@ describe "Compiler (toCJS)", ->
       export default Ember;
     """, "You cannot use both `export default` and `export` in the same module"
 
-  it 'converts `import foo from "bar"`', ->
-    shouldCompileCJS """
-      import View from "ember";
-    """, """
-      "use strict";
-      var View = require("ember").View;
-    """
-
-  it 'converts `import { get, set } from "ember"', 
+  it 'converts `import { get, set } from "ember"',
     shouldCompileCJS """
       import { get, set } from "ember";
     """, """
@@ -82,7 +74,7 @@ describe "Compiler (toCJS)", ->
       var set = __dependency1__.set;
     """
 
-  it 'support single quotes in import from', ->
+  it 'support single quotes in import {x, y} from z', ->
     shouldCompileCJS """
       import { get, set } from 'ember';
     """, """
@@ -92,25 +84,17 @@ describe "Compiler (toCJS)", ->
       var set = __dependency1__.set;
     """
 
-  it 'converts `import "bar" as foo`', ->
+  it 'converts `import foo from "bar"`', ->
     shouldCompileCJS """
-      import "underscore" as _;
+      import _ from "underscore";
     """, """
       "use strict";
       var _ = require("underscore");
     """
 
-  it 'supports single quotes in import as', ->
+  it 'supports single quotes in import x from y', ->
     shouldCompileCJS """
-      import 'underscore' as undy;
-    """, """
-      "use strict";
-      var undy = require("underscore");
-    """
-
-  it 'supports anonymous modules', ->
-    shouldCompileCJS """
-      import "underscore" as undy;
+      import undy from 'underscore';
     """, """
       "use strict";
       var undy = require("underscore");
