@@ -20,4 +20,4 @@ class CoffeeScriptBuilder extends ScriptBuilder
     else
       '->'
 
-export = CoffeeScriptBuilder
+export default CoffeeScriptBuilder

@@ -142,4 +142,4 @@ class CLI
     @fs.mkdirSync directory
 
 
-export = CLI
+export default CLI

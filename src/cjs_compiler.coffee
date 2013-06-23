@@ -31,10 +31,10 @@ class CJSCompiler extends AbstractCompiler
 
       s.append @lines...
 
-      if @exportAs
-        s.line "module.exports = #{@exportAs}"
+      if @exportDefault
+        s.line "module.exports = #{@exportDefault}"
 
       for exportName, exportValue of @exports
         s.line "exports.#{exportName} = #{exportValue}"
 
-export = CJSCompiler
+export default CJSCompiler

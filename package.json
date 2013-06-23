@@ -39,6 +39,7 @@
     "jasmine-node": "~1.8.0",
     "grunt-jasmine-node": "~0.1.0",
     "grunt-es6-module-transpiler": "~0.3.0",
-    "grunt-contrib-coffee": "~0.7.0"
+    "grunt-contrib-coffee": "~0.7.0",
+    "grunt-contrib-copy": "~0.4.1"
   }
 }

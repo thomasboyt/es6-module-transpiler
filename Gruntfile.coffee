@@ -4,6 +4,7 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-jasmine-node'
   grunt.loadNpmTasks 'grunt-es6-module-transpiler'
   grunt.loadNpmTasks 'grunt-contrib-coffee'
+  grunt.loadNpmTasks 'grunt-contrib-copy'
 
   grunt.initConfig
     'coffee':
@@ -27,5 +28,13 @@ module.exports = (grunt) ->
       requirejs: false
       extensions: 'js|coffee'
       forceExit: true
+    copy:
+      # run this when you want to build the transpiler with your current HEAD
+      # and not last stable version installed from NPM
+      # revert back to stable with `npm install`
+      dist:
+        src: 'lib/**/*'
+        dest: 'node_modules/grunt-es6-module-transpiler/node_modules/es6-module-transpiler/'
+
 
   grunt.registerTask('default', ['transpile', 'coffee', 'jasmine_node'])

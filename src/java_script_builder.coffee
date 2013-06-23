@@ -12,4 +12,4 @@ class JavaScriptBuilder extends ScriptBuilder
   _functionTail: ->
     '}'
 
-export = JavaScriptBuilder
+export default JavaScriptBuilder

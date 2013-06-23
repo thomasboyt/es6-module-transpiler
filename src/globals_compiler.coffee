@@ -8,11 +8,11 @@ class GlobalsCompiler extends AbstractCompiler
       receivedArgs = []
       locals = {}
 
-      into = @options.into or @exportAs
+      into = @options.into or @exportDefault
 
-      if !isEmpty(@exports) or @exportAs
+      if !isEmpty(@exports) or @exportDefault
         passedArgs.push(
-          if @exportAs
+          if @exportDefault
             s.global
           else if into
             "#{s.global}.#{into} = {}"
@@ -44,8 +44,8 @@ class GlobalsCompiler extends AbstractCompiler
           # body
           s.append @lines...
 
-          if @exportAs
-            s.set "exports.#{into}", @exportAs
+          if @exportDefault
+            s.set "exports.#{into}", @exportDefault
           else
             for exportName, exportValue of @exports
               s.set "exports.#{exportName}", exportValue
@@ -55,4 +55,4 @@ class GlobalsCompiler extends AbstractCompiler
 
       s.line => s.call wrapper, args
 
-export = GlobalsCompiler
+export default GlobalsCompiler

@@ -8,7 +8,7 @@ class AbstractCompiler
     @compiler = compiler
 
     @exports = compiler.exports
-    @exportAs = compiler.exportAs
+    @exportDefault = compiler.exportDefault
     @imports = compiler.imports
     @importAs = compiler.importAs
 
@@ -24,8 +24,8 @@ class AbstractCompiler
     @assertValid()
 
   assertValid: ->
-    if @exportAs and !isEmpty(@exports)
-      throw new CompileError("You cannot use both `export =` and `export` in the same module")
+    if @exportDefault and !isEmpty(@exports)
+      throw new CompileError("You cannot use both `export default` and `export` in the same module")
 
   buildPreamble: (names) ->
     args = []
@@ -57,4 +57,4 @@ class AbstractCompiler
       builder.var import_, -> builder.prop dependencyName, import_
 
 
-export = AbstractCompiler
+export default AbstractCompiler

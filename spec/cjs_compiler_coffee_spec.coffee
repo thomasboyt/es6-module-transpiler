@@ -1,11 +1,11 @@
 { shouldCompileCJS, shouldRaise } = require './spec_helper'
 
 describe "Compiler (toCJS for CoffeeScript)", ->
-  it 'generates a single export if `export =` is used', ->
+  it 'generates a single export if `export default` is used', ->
     shouldCompileCJS """
       class jQuery
 
-      export = jQuery
+      export default jQuery
     """, """
       "use strict"
       class jQuery
@@ -40,11 +40,11 @@ describe "Compiler (toCJS for CoffeeScript)", ->
       exports.set = set
     """, coffee: yes
 
-  it 'raises if both `export =` and `export foo` is used', ->
+  it 'raises if both `export default` and `export foo` is used', ->
     shouldRaise """
       export { get, set }
-      export = Ember
-    """, "You cannot use both `export =` and `export` in the same module", coffee: yes
+      export default Ember
+    """, "You cannot use both `export default` and `export` in the same module", coffee: yes
 
   it 'converts `import foo from "bar"`', ->
     shouldCompileCJS """

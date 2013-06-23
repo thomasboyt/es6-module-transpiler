@@ -33,7 +33,7 @@ class AMDCompiler extends AbstractCompiler
               for exportName, exportValue of @exports
                 s.line "__exports__.#{exportName} = #{exportValue}"
 
-              if @exportAs
-                s.line "return #{@exportAs}"
+              if @exportDefault
+                s.line "return #{@exportDefault}"
 
-export = AMDCompiler
+export default AMDCompiler

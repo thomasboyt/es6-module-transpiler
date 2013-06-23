@@ -1,11 +1,11 @@
 { shouldCompileGlobals, shouldRaise } = require './spec_helper'
 
 describe 'Compiler (toGlobals with CoffeeScript)', ->
-  it 'generates a single export if `export =` is used', ->
+  it 'generates a single export if `export default` is used', ->
     shouldCompileGlobals """
       class jQuery
 
-      export = jQuery
+      export default jQuery
     """, """
       ((exports) ->
         "use strict"
@@ -47,12 +47,12 @@ describe 'Compiler (toGlobals with CoffeeScript)', ->
       )(window.Ember = {})
     """, into: 'Ember', coffee: yes
 
-  it "uses a single window export if `export = Expression` is used with the :into option", ->
+  it "uses a single window export if `export default Expression` is used with the :into option", ->
     shouldCompileGlobals """
       get = ->
       set = ->
 
-      export = { get: get, set: set }
+      export default { get: get, set: set }
     """, """
       ((exports) ->
         "use strict"
@@ -97,11 +97,11 @@ describe 'Compiler (toGlobals with CoffeeScript)', ->
       )(window.Ember = {})
     """, into: 'Ember', coffee: yes
 
-  it "raises if both `export =` and `export foo` is used", ->
+  it "raises if both `export default` and `export foo` is used", ->
     shouldRaise """
       export { get, set }
-      export = Ember
-    """, "You cannot use both `export =` and `export` in the same module", coffee: yes
+      export default Ember
+    """, "You cannot use both `export default` and `export` in the same module", coffee: yes
 
   it 'converts `import foo from "bar"` using a map to globals', ->
     shouldCompileGlobals """
