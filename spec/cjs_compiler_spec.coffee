@@ -107,3 +107,13 @@ describe "Compiler (toCJS)", ->
       "use strict";
       var EmView = require("ember").View;
     """
+
+  it 'supports import { default as foo } from "foo"', ->
+    shouldCompileCJS """
+      import { View as EmView, default as Ember } from 'ember';
+    """, """
+      "use strict";
+      var __dependency1__ = require("ember");
+      var EmView = __dependency1__.View;
+      var Ember = __dependency1__;
+    """

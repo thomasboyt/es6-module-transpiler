@@ -27,7 +27,10 @@ class CJSCompiler extends AbstractCompiler
           # var foo = __dependency1__.foo;
           # var bar = __dependency1__.bar;
           for own name, alias of variables
-            s.var alias, "#{dependency}.#{name}"
+            if name == 'default'
+              s.var alias, "#{dependency}"
+            else
+              s.var alias, "#{dependency}.#{name}"
 
       s.append @lines...
 
