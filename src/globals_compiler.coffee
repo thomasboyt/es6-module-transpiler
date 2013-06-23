@@ -31,8 +31,8 @@ class GlobalsCompiler extends AbstractCompiler
         else
           receivedArgs.push globalImport
 
-          for import_ in @imports[name]
-            locals[import_] = "#{globalImport}.#{import_}"
+          for own name, alias of @imports[name]
+            locals[alias] = "#{globalImport}.#{name}"
 
       wrapper = =>
         s.function receivedArgs, =>

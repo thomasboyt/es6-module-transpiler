@@ -15,10 +15,10 @@ class CJSCompiler extends AbstractCompiler
         doImport name, import_
 
       for own import_, variables of @imports
-        if variables.length is 1
+        if Object.keys(variables).length is 1
           # var foo = require('./foo').foo;
-          name = variables[0]
-          doImport name, import_, name
+          name = Object.keys(variables)[0]
+          doImport variables[name], import_, name
         else
           # var __dependency1__ = require('./foo');
           dependency = deps.next()
@@ -26,8 +26,8 @@ class CJSCompiler extends AbstractCompiler
 
           # var foo = __dependency1__.foo;
           # var bar = __dependency1__.bar;
-          for name in variables
-            s.var name, "#{dependency}.#{name}"
+          for own name, alias of variables
+            s.var alias, "#{dependency}.#{name}"
 
       s.append @lines...
 

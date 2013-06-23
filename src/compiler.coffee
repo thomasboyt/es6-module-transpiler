@@ -8,7 +8,7 @@ EXPORT_FUNCTION = /^\s*export\s+function\s+(\w+)\s*(\(.*)$/
 EXPORT_VAR = /^\s*export\s+var\s+(\w+)\s*=\s*(.*)$/
 
 IMPORT = /^\s*import\s+(.*)\s+from\s+(?:"([^"]+?)"|'([^']+?)')\s*(;)?\s*$/
-#IMPORT_AS = /^\s*import\s+(?:"([^"]+?)"|'([^']+?)')\s*as\s+(.*?)\s*(;)?\s*$/
+IMPORT_AS = /^\s*(.*)\s+as\s+(.*)\s*$/
 
 COMMENT_START = new RegExp("/\\*")
 COMMENT_END = new RegExp("\\*/")
@@ -104,18 +104,22 @@ class Compiler
     @lines.push "var #{name} = #{value}"
     @exports[name] = name
 
-  processImportDefault: (match) ->
-    @importDefault[match[2] or match[3]] = match[1]
-
   processImport: (match) ->
     pattern = match[1]
 
     if pattern[0] is '{' and pattern[pattern.length-1] is '}'
       pattern = pattern[1...-1]
-      importNames = (name.trim() for name in pattern.split(/\s*,\s*/))
-      @imports[match[2] or match[3]] = importNames
+      importSpecifiers = (name.trim() for name in pattern.split(/\s*,\s*/))
+
+      imports = {}
+      for name in importSpecifiers
+        if asMatch = name.match IMPORT_AS
+          imports[asMatch[1]] = asMatch[2]
+        else
+          imports[name] = name
+      @imports[match[2] or match[3]] = imports
     else
-      @processImportDefault(match)
+      @importDefault[match[2] or match[3]] = match[1]
 
   processLine: (line) ->
     @lines.push line

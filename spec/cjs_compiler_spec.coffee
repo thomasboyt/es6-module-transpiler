@@ -64,7 +64,7 @@ describe "Compiler (toCJS)", ->
       export default Ember;
     """, "You cannot use both `export default` and `export` in the same module"
 
-  it 'converts `import { get, set } from "ember"',
+  it 'converts `import { get, set } from "ember"', ->
     shouldCompileCJS """
       import { get, set } from "ember";
     """, """
@@ -98,4 +98,12 @@ describe "Compiler (toCJS)", ->
     """, """
       "use strict";
       var undy = require("underscore");
+    """
+
+  it 'supports import { x as y } from "foo"', ->
+    shouldCompileCJS """
+      import { View as EmView } from 'ember';
+    """, """
+      "use strict";
+      var EmView = require("ember").View;
     """

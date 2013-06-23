@@ -53,8 +53,8 @@ class AbstractCompiler
     return builder.toString()
 
   buildImportsForPreamble: (builder, imports_, dependencyName) ->
-    for import_ in imports_
-      builder.var import_, -> builder.prop dependencyName, import_
+    for own name, alias of imports_
+      builder.var alias, -> builder.prop dependencyName, name
 
 
 export default AbstractCompiler

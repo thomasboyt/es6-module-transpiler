@@ -54,7 +54,7 @@ describe "Compiler (toCJS for CoffeeScript)", ->
       View = require("ember").View
     """, coffee: yes
 
-  it 'converts `import { get, set } from "ember"', 
+  it 'converts `import { get, set } from "ember"', ->
     shouldCompileCJS """
       import { get, set } from "ember"
     """, """
