@@ -24,12 +24,12 @@
     "url": "https://github.com/square/es6-module-transpiler.git"
   },
   "dependencies": {
-    "coffee-script": "~1.3.3",
     "optimist": "~0.3.5"
   },
   "scripts": {
     "test": "grunt && jasmine-node --coffee spec",
-    "package": "npm run-script test && gluejs --basepath lib --include . --exclude 'require_support' --out ../dist/es6-module-transpiler.js --global ModuleTranspiler && uglifyjs dist/es6-module-transpiler.js > dist/es6-module-transpiler.min.js"
+    "package": "npm run-script test && gluejs --basepath lib --include . --exclude 'require_support' --out ../dist/es6-module-transpiler.js --global ModuleTranspiler && uglifyjs dist/es6-module-transpiler.js > dist/es6-module-transpiler.min.js",
+    "postinstall": "cd node_modules/grunt-es6-module-transpiler/ && npm install es6-module-transpiler && cd ../.."
   },
   "devDependencies": {
     "gluejs": "~0.2.0",
@@ -37,6 +37,8 @@
     "grunt": "~0.4.1",
     "grunt-cli": "~0.1.6",
     "jasmine-node": "~1.8.0",
-    "grunt-jasmine-node": "~0.1.0"
+    "grunt-jasmine-node": "~0.1.0",
+    "grunt-es6-module-transpiler": "~0.3.0",
+    "grunt-contrib-coffee": "~0.7.0"
   }
 }
