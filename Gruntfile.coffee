@@ -5,6 +5,8 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-es6-module-transpiler'
   grunt.loadNpmTasks 'grunt-contrib-coffee'
   grunt.loadNpmTasks 'grunt-contrib-copy'
+  grunt.loadNpmTasks 'grunt-contrib-gluejs'
+  grunt.loadNpmTasks 'grunt-contrib-uglify'
 
   grunt.initConfig
     coffee:
@@ -35,7 +37,19 @@ module.exports = (grunt) ->
       self:
         src: 'lib/**/*'
         dest: 'node_modules/grunt-es6-module-transpiler/node_modules/es6-module-transpiler/'
+    gluejs:
+      dist:
+        options:
+          export: 'ModuleTranspiler'
+          basepath: 'lib'
+        src: 'lib/*.js'
+        dest: 'dist/es6-module-transpiler.js'
 
+    uglify:
+      dist:
+        files:
+          'dist/es6-module-transpiler.min.js': ['dist/es6-module-transpiler.js']
 
   grunt.registerTask('default', ['transpile', 'coffee', 'jasmine_node'])
+  grunt.registerTask('dist', ['default', 'gluejs', 'uglify'])
   grunt.registerTask('build-self', ['copy:self', 'default'])
