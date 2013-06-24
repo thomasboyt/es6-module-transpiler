@@ -1,4 +1,4 @@
-import './abstract_compiler' as AbstractCompiler
+import AbstractCompiler from './abstract_compiler'
 
 class CJSCompiler extends AbstractCompiler
   stringify: ->

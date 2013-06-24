@@ -1,6 +1,6 @@
-import './amd_compiler' as AMDCompiler
-import './cjs_compiler' as CJSCompiler
-import './globals_compiler' as GlobalsCompiler
+import AMDCompiler from './amd_compiler'
+import CJSCompiler from './cjs_compiler'
+import GlobalsCompiler from './globals_compiler'
 
 EXPORT = /^\s*export\s+(.*?)\s*(;)?\s*$/
 EXPORT_DEFAULT = /^\s*export\s*default\s*(.*?)\s*(;)?\s*$/

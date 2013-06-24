@@ -1,4 +1,4 @@
-import './abstract_compiler' as AbstractCompiler
+import AbstractCompiler from './abstract_compiler'
 import { isEmpty } from './utils'
 
 class GlobalsCompiler extends AbstractCompiler

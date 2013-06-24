@@ -1,7 +1,7 @@
-import 'optimist' as optimist
-import 'fs' as fs
-import 'path' as path
-import './compiler' as Compiler
+import optimist from 'optimist'
+import fs from 'fs'
+import path from 'path'
+import Compiler from './compiler'
 
 class CLI
   @start: (argv, stdin=process.stdin, stdout=process.stdout, fs_=fs) ->

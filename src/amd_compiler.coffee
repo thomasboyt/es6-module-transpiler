@@ -1,6 +1,6 @@
-import './abstract_compiler' as AbstractCompiler
+import AbstractCompiler from './abstract_compiler'
 import { isEmpty } from './utils'
-import 'path' as path;
+import path from 'path'
 
 class AMDCompiler extends AbstractCompiler
   stringify: ->

@@ -1,6 +1,6 @@
-import './compile_error' as CompileError
-import './java_script_builder' as JavaScriptBuilder
-import './coffee_script_builder' as CoffeeScriptBuilder
+import CompileError from './compile_error'
+import JavaScriptBuilder from './java_script_builder'
+import CoffeeScriptBuilder from './coffee_script_builder'
 import { isEmpty } from './utils'
 
 class AbstractCompiler
