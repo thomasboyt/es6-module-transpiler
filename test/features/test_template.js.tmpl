@@ -17,14 +17,14 @@ test("<%= test.name %>", function() {
   <% if (test.invalid) { %>
 try {
   <%= compiler(test) %>
-  compiler.toAMD();
+  compiler.toAMD().code;
   ok(false, "should have raised an error");
 } catch (e) {
   ok(e, e ? e.message : "expects an error");
 }
   <% } else { %>
   <%= compiler(test) %>
-equal(compiler.to<%= test.typeName %>(), <%= JSON.stringify(test.expected) %>);
+equal(compiler.to<%= test.typeName %>().code, <%= JSON.stringify(test.expected) %>);
   <% } %>
 });
 <% }); %>
