@@ -6260,6 +6260,7 @@ var AMDCompiler = function($__super) {
       var out = this.buildPreamble(this.exports.length > 0);
       this.buildImports();
       this.buildExports();
+      this.options.imports = this.options.imports || {};
       var innerLines = this.source.toString().split("\n");
       var inner = innerLines.reduce(function(acc, item) {
         if (item === "") return acc + "\n";
@@ -6278,6 +6279,7 @@ var AMDCompiler = function($__super) {
       var idx;
       for (idx = 0; idx < dependencyNames.length; idx++) {
         var name = dependencyNames[idx];
+        name = this.options.imports[name] || name;
         out += ("\"" + name + "\"");
         if (!(idx === dependencyNames.length - 1)) out += ",";
       }
@@ -6398,6 +6400,7 @@ var CJSCompiler = function($__super) {
       this.source = new SourceModifier(string);
       this.buildImports();
       this.buildExports();
+      this.options.imports = this.options.imports || {};
       var out = "\"use strict\";\n";
       out += this.source.toString();
       out = out.trim();
@@ -6410,6 +6413,7 @@ var CJSCompiler = function($__super) {
       return ("require(\"" + name + "\");");
     },
     doDefaultImport: function(name, dependencyName, idx) {
+      dependencyName = this.options.imports[dependencyName] || dependencyName;
       if (this.options.compatFix === true) {
         return ("var " + name + " = require(\"" + dependencyName + "\").__default__; || require(\"" + dependencyName + "\")\n");
       } else {
@@ -6417,6 +6421,7 @@ var CJSCompiler = function($__super) {
       }
     },
     doNamedImport: function(name, dependencyName, alias) {
+      dependencyName = this.options.imports[dependencyName] || dependencyName;
       return ("var " + alias + " = require(\"" + dependencyName + "\")." + name + ";\n");
     },
     doExportSpecifier: function(name, reexport) {
